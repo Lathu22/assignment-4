@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silly Story Generator</title>
+<style>
+/* Styles for demonstration purposes */
+#story-container {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+</style>
+</head>
+<body>
+
+<div id="story-container">
+  <p id="story">Once upon a time, there was a person named Bob. He had 10 apples and it was 80°F outside.</p>
+  <input type="text" id="custom-name" placeholder="Enter custom name">
+  <input type="radio" name="units" id="us-units" checked>
+  <label for="us-units">US</label>
+  <input type="radio" name="units" id="uk-units">
+  <label for="uk-units">UK</label>
+  <button id="generate-btn">Generate random story</button>
+</div>
+
+<script>
+document.getElementById('generate-btn').addEventListener('click', generateStory);
+
+function generateStory() {
+  // Get elements
+  var storyElement = document.getElementById('story');
+  var customNameElement = document.getElementById('custom-name');
+  var usUnitsElement = document.getElementById('us-units');
+  
+  // Default story template
+  var storyTemplate = "Once upon a time, there was a person named Bob. He had 10 apples and it was 80°F outside.";
+  
+  // Get custom name if provided
+  var customName = customNameElement.value.trim();
+  if (customName !== '') {
+    storyTemplate = storyTemplate.replace('Bob', customName);
+  }
+  
+  // Convert units if UK radio button is checked
+  if (usUnitsElement.checked) {
+    storyTemplate = convertToUKUnits(storyTemplate);
+  }
+  
+  // Display generated story
+  storyElement.textContent = storyTemplate;
+}
+
+function convertToUKUnits(story) {
+  // Conversion logic - for demonstration purposes, just change Fahrenheit to Celsius and apples to bananas
+  return story.replace('°F', '°C').replace('apples', 'bananas');
+}
+</script>
+
+</body>
+</html>
+
