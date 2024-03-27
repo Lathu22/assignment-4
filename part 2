@@ -1,0 +1,39 @@
+document.addEventListener("DOMContentLoaded", function() {
+    const imageFilenames = ['pic1.jpg', 'pic2.jpg', 'pic3.jpg', 'pic4.jpg', 'pic5.jpg'];
+    const altTexts = {
+        'pic1.jpg': 'Closeup of a blue human eye',
+        'pic2.jpg': 'A cat sitting on a fence',
+        'pic3.jpg': 'Sunset over the ocean',
+        'pic4.jpg': 'Green fields with mountains in the background',
+        'pic5.jpg': 'Colorful hot air balloons in the sky'
+    };
+
+    const fullImg = document.querySelector('.full-img');
+    const displayedImg = document.querySelector('.displayed-img');
+    const thumbBar = document.querySelector('.thumb-bar');
+    const darkenButton = document.querySelector('.dark');
+
+    // Loop through image filenames and create thumbnails
+    imageFilenames.forEach(filename => {
+        const img = document.createElement('img');
+        img.setAttribute('src', 'images/' + filename);
+        img.setAttribute('alt', altTexts[filename]);
+        thumbBar.appendChild(img);
+
+        // Add click event listener to each thumbnail
+        img.addEventListener('click', function() {
+            displayedImg.setAttribute('src', 'images/' + filename);
+            displayedImg.setAttribute('alt', altTexts[filename]);
+        });
+    });
+
+    // Add click event listener to the darken button
+    darkenButton.addEventListener('click', function() {
+        fullImg.classList.toggle('darken');
+        if (fullImg.classList.contains('darken')) {
+            darkenButton.textContent = 'Lighten';
+        } else {
+            darkenButton.textContent = 'Darken';
+        }
+    });
+});
